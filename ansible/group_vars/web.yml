@@ -1,0 +1,18 @@
+# Wordpressin asetukset
+wordpress_database_host: localhost
+wordpress_database: wordpress
+wordpress_user: wordpress
+wordpress_password: "{{ lookup('password', '/tmp/wordpress_password chars=ascii_letters,digits') }}"
+wordpress_allow_file_mods: true
+wordpress_automatic_updates: true
+
+# Tietokannan asetukset
+mariadb_bind_address: 127.0.0.1
+mariadb_root_password: "{{ lookup('password', '/tmp/mariadb_root_password chars=ascii_letters,digits') }}"
+mariadb_databases:
+- name: "{{ wordpress_database }}"
+mariadb_users:
+- name: "{{ wordpress_user }}"
+  password: "{{ wordpress_password }}"
+  priv: "{{ wordpress_database }}.*:ALL"
+  host: "localhost"
