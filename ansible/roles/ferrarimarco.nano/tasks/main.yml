@@ -1,0 +1,11 @@
+---
+
+- include: setup-debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: Configure Nano to always show line numbers
+  lineinfile:
+    dest: "{{ ferrarimarco_nano_nano_settings_file_path }}"
+    create: yes
+    mode: 0644
+    line: "set const"

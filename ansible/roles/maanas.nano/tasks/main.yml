@@ -1,0 +1,20 @@
+---
+- name: Ensure Nano is installed (RedHat).
+  package:
+    name: "{{ item }}"
+    state: installed
+    enablerepo: "{{ nano_enablerepo }}"
+  with_items: "{{ nano_packages }}"
+  when: (ansible_os_family == 'RedHat')
+
+- name: Update apt cache (Debian).
+  apt: update_cache=yes cache_valid_time=86400
+  when: ansible_os_family == 'Debian'
+
+- name: Ensure nano is installed (Debian).
+  apt:
+    name: "{{ item }}"
+    state: installed
+  with_items: "{{ nano_packages }}"
+  when: (ansible_os_family == 'Debian')
+

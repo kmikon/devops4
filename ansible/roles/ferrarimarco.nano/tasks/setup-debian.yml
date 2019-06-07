@@ -1,0 +1,8 @@
+---
+- name: Ensure Nano is installed
+  apt:
+    autoremove: yes
+    cache_valid_time: 3600
+    pkg: nano
+    state: present
+    update_cache: yes
